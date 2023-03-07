@@ -1,2 +1,2 @@
-# Analytics_Projects
-Projects  which showcase my analytical ability both in a technical and visual sense
+## Data Analytics Portfolio
+Projects  which showcase my analytical ability with various datasets both in a technical and visual sense across different industries
