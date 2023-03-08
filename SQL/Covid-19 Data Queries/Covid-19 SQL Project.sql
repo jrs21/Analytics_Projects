@@ -1,5 +1,5 @@
 /*
-Covid-19 Data Exploration 
+Covid-19 Data Exploration in Microsoft SQL Server
 
 Skills used: Converting data types, Aggregate functions, Temp tables, CTE's, Joins, Windows functions, and creating views
 */
@@ -147,8 +147,10 @@ From #PercentPopulationVaccinated
 
 -- Creating a View to store data for later visualizations
 
-Create View PercentPopulationVaccinated as
-Select dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
+USE [Covid-19 SQL Project]
+GO
+Create View PercentPopulation_Vaccinated as
+Select distinct dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
 , SUM(CONVERT(int,vac.new_vaccinations)) OVER (Partition by dea.Location Order by dea.location, dea.Date) as RollingPeopleVaccinated
 --, (RollingPeopleVaccinated/population)*100
 From [Covid-19 SQL Project]..Covid_Deaths dea
