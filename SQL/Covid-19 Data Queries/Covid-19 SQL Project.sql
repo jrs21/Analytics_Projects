@@ -145,8 +145,7 @@ From #PercentPopulationVaccinated
 
 
 
--- Creating a View to store data for later visualizations
-
+-- Creating a Views to store pertinent data 
 USE [Covid-19 SQL Project]
 GO
 Create View PercentPopulation_Vaccinated as
@@ -158,3 +157,24 @@ Join [Covid-19 SQL Project]..Covid_Vaccinations vac
 	On dea.location = vac.location
 	and dea.date = vac.date
 where dea.continent is not null 
+
+--- 
+
+USE [Covid-19 SQL Project]
+GO
+Create View TotalDeath_Count as
+Select distinct continent, MAX(cast(Total_deaths as int)) as TotalDeathCount
+From [Covid-19 SQL Project]..Covid_Deaths
+--Where location like '%states%'
+Where continent is not null 
+Group by continent
+
+---
+
+USE [Covid-19 SQL Project]
+GO
+Create View PercentPopulation_Infected as
+Select distinct Location, Population, MAX(total_cases) as HighestInfectionCount,  Max((total_cases/population))*100 as PercentPopulationInfected
+From [Covid-19 SQL Project]..Covid_Deaths
+--Where location like '%states%'
+Group by Location, Population
